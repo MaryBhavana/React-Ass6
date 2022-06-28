@@ -63,33 +63,32 @@ table{
     top:20px;
 }
 .addstud{
-    font-size: 20px;
-    display: flex;
-    flex-flow:column wrap;
+   font-size: 20px;
+   
 }
 input{
     width:200px;
-    position: relative;
-    left:650px;
+    
+   
+    
 }
 .cancel{
     background-color: darkseagreen;
     width:100px;
+    border-radius: 10px;
     border: none;
     font-size: 20px;
     height: 30px;
     position: relative;
-    top:30px;
+    top:13px;
     right:30px;
 }
 .sub{
-    background-color:red;
-    width:100px;
-    border: none;
-    font-size: 20px;
-    height: 30px;
-    position: relative; 
-    top:30px;  
+   background-color: green;
+   font-size: 20px;
+   position: relative;
+   left:10px;
+   top:10px;
 }
 nav a{
     text-decoration: none;
