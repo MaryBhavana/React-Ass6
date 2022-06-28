@@ -1,81 +1,81 @@
 import React, { useContext } from 'react'
 import { store } from './Detail'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import './ass4.css'
-
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import './edit.css'
 
 const EditStud = () => {
+  const [name, setName] = useState("");
 
-const[Name,setName]=useState("")
+  const [age, setAge] = useState("");
 
-const[Age,setAge]=useState("")
+  const [course, setCourse] = useState("");
 
+  const [batch, setBatch] = useState("");
 
-const[Course,setCourse]=useState("")
+  const { id } = useParams();
 
+  const [students, setStudents] = useContext(store);
 
-const[Batch,setBatch]=useState("")
+  const ChangeHandlerName = (e) => {
+    setName(e.target.value);
+  };
+  const ChangeHandlerAge = (e) => {
+    setAge(e.target.value);
+  };
+  const ChangeHandlerCourse = (e) => {
+    setCourse(e.target.value);
+  };
+  const ChangeHandlerStudent = (e) => {
+    setBatch(e.target.value);
+  };
+  useEffect(() => {
+    students.forEach((element) => {
+      if (element.id === id) {
+        setName(element.Name);
+        setAge(element.Age);
+        setCourse(element.Course);
+        setBatch(element.Batch);
+      }
+    });
+  }, [id, students]);
 
-const[students,setStudents]=useContext(store)
+  const SubmitHandler = () => {
+    setStudents((previousV) =>
+      previousV.map((store) =>
+        store.id === id
+          ? {
+              id: id,
+              Name: name,
+              Age: age,
+              Batch: batch,
+              Course: course,
+            }
+          : store
+      )
+    );
+  };
 
-
-const ChangeHandler1=(e)=>
-{
-setName(e.target.value)
-
-}
-const ChangeHandler2=(e)=>
-{
-setAge(e.target.value)
-
-}
-const ChangeHandler3=(e)=>
-{
-setCourse(e.target.value)
-
-}
-const ChangeHandler4=(e)=>
-{
-setBatch(e.target.value)
-
-}
-
-const SubmitHandler=()=>{
-
-
-setStudents([...students,{Name:Name,Age:Age,Course:Course,Batch:Batch,id:new Date().getTime().toString()}])
-
-
-}
   return (
-    <div>
+    <div className='edit'>
+      <form style={{ marginTop: "25px" }}>
+        <label>Name:</label>
+            <input id="name" type="text" name='name' value={name} onChange={ChangeHandlerName} />
+            <label>Age:</label>
+            <input id="age" type="text" name='age' value={age} onChange={ChangeHandlerAge} />
+            <label>Course:</label>
+            <input id="course" type="text" name='course' value={course} onChange={ChangeHandlerCourse} />
+            <label>Batch:</label>
+            <input id="batch" type="text" name='batch' value={batch} onChange={ChangeHandlerStudent} />
+        <div style={{ marginTop: "25px" }}>
+          <Link to="/student"><button className='button'   style={{ marginLeft: "30px"}}>Cancel</button></Link>
+          <Link to="/student" onClick={SubmitHandler}><button className='sub'>Submit</button></Link>
+        </div>      
+    </form>
+      </div>
+    )
+  
 
+};
 
-<div className='addstud'>
-
-<label>Name:</label>
-<input id="name" type="text" name='name' value={Name} onChange={ChangeHandler1} />
-<label>Age:</label>
-<input id="age" type="text" name='age' value={Age} onChange={ChangeHandler2} />
-<label>Course:</label>
-<input id="course" type="text" name='course' value={Course} onChange={ChangeHandler3} />
-<label>Batch:</label>
-<input id="batch" type="text" name='batch' value={Batch} onChange={ChangeHandler4} />
-
-</div>
-
-<div>
-
-<Link to="/EditStud"><button className='cancel'>Cancel</button></Link>
-<Link to="/EditStud" ><button className='sub'onClick={SubmitHandler}>Submit</button></Link>
-
-</div>
-
-
-
-    </div>
-  )
-}
-
-export default EditStud
+export default EditStud;

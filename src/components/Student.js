@@ -30,7 +30,7 @@ const Student = () => {
 <td>{student.Age}</td>
 <td>{student.Course}</td>
 <td>{student.Batch}</td>
-<td><Link to="/edit">Edit</Link></td>
+<td><Link to={`/EditStud/${student.id}`}>Edit</Link></td>
 
 </tr>
 
